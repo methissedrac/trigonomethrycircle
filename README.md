@@ -20,12 +20,28 @@
   <input type="text" id="inputValue" placeholder="Enter angle or expression" />
   <button onclick="drawPoint()">Draw Point</button>
 
-  <script>
+<script>
     const canvas = document.getElementById('circleCanvas');
     const ctx = canvas.getContext('2d');
     const radius = 150;
     const centerX = canvas.width / 2;
     const centerY = canvas.height / 2;
+
+    // Function to draw grid background
+    function drawGrid() {
+      const gridSpacing = 10; // Spacing for grid cells
+      ctx.beginPath();
+      for (let x = 0; x <= canvas.width; x += gridSpacing) {
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, canvas.height);
+      }
+      for (let y = 0; y <= canvas.height; y += gridSpacing) {
+        ctx.moveTo(0, y);
+        ctx.lineTo(canvas.width, y);
+      }
+      ctx.strokeStyle = '#eaeaea'; // Light grey color for the grid lines
+      ctx.stroke();
+    }
 
     // Draw the unit circle
     function drawCircle() {
@@ -37,6 +53,7 @@
     // Clear previous point
     function clearCanvas() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawGrid();  // Draw grid background after clearing
       drawCircle();  // Redraw circle after clearing
     }
 
@@ -68,10 +85,11 @@
 
     // Insert Pi symbol into the input when clicked
     document.getElementById('piButton').addEventListener('click', function () {
-      document.getElementById('inputValue').value = 'π';
+      document.getElementById('inputValue').value += 'π';
     });
 
     // Initial draw
+    drawGrid();
     drawCircle();
   </script>
 
