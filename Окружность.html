@@ -59,19 +59,23 @@
     }
 
     // Draw a point on the circle at the given angle in radians
-    function drawPoint() {
-      let inputValue = document.getElementById('inputValue').value;
-      // Replace π symbol with Math.PI and evaluate the expression
-      let angleInRadians = 0;
-      if (inputValue.trim() !== '') {
-        inputValue = inputValue.replace(/π/g, 'Math.PI');
-        try {
-          angleInRadians = eval(inputValue);
-        } catch {
-          alert("Invalid expression");
-          return;
-        }
-      }
+ function drawPoint() {
+  let inputValue = document.getElementById('inputValue').value;
+  // Заменяем символ π на выражение Math.PI и добавляем пробелы вокруг *, чтобы корректно выполнить операцию
+  inputValue = inputValue.replace(/π/g, ' * Math.PI ');
+
+  let angleInRadians = 0;
+  if (inputValue.trim() !== '') {
+    try {
+      angleInRadians = eval(inputValue);
+    } catch {
+      alert("Invalid expression");
+      return;
+    }
+  }
+
+  // Здесь оставляем ваш остальной код для рисования точки...
+}
 
       const x = centerX + radius * Math.cos(angleInRadians);
       const y = centerY - radius * Math.sin(angleInRadians);
